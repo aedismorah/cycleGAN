@@ -65,20 +65,20 @@ class Generator(nn.Module):
         self.relu=nn.ReLU()
 
     def forward(self, input):
-        x = self.first(input)
+        x1 = self.first(input)
 
-        x = self.relu(x + self.R1(x))
-        x = self.relu(x + self.R2(x))
-        x = self.relu(x + self.R3(x))
+        x2 = self.relu(x1 + self.R1(x1))
+        x3 = self.relu(x2 + self.R2(x2))
+        x4 = self.relu(x3 + self.R3(x3))
 
-        x = self.relu(x + self.R4(x))
-        x = self.relu(x + self.R5(x))
-        x = self.relu(x + self.R6(x))
+        x5 = self.relu(x2 + x4 + self.R4(x4))
+        x6 = self.relu(x5 + self.R5(x5))
+        x7 = self.relu(x6 + self.R6(x6))
 
-        x = self.relu(x + self.R7(x))
-        x = self.relu(x + self.R8(x))
-        x = self.relu(x + self.R9(x))
+        x8 = self.relu(x3 + x5 + x7 + self.R7(x7))
+        x9 = self.relu(x8 + self.R8(x8))
+        x10 = self.relu(x2 + x6 + x9 + self.R9(x9))
 
-        x = self.last(x) + input
+        x = self.last(x10) + input
 
         return self.tanh(x)
